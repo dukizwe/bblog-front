@@ -40,7 +40,6 @@ export default function Posts() {
                               dispatch(appendPostsAction(posts))
                     }
           }
-          console.log('posts')
           return (
                     <div className="container py-5">
                               <InfiniteScroll

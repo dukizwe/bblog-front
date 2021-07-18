@@ -16,7 +16,7 @@ export default memo(function PostCard({ post }) {
                                         </Link>
                                         <div className="mb-2">
                                                   <div className="btn-group d-flex flex-wrap">
-                                                            {post.tags.map(tag => {
+                                                            {post.categories.map(tag => {
                                                                       return <Link to={`/posts/tag/${tag._id}`} className="btn btn-sm btn-outline-primary mt-1">{tag.name}</Link>
                                                             })}
                                                   </div>
