@@ -21,36 +21,53 @@ export default class Validation {
           }
 
           required(key, value) {
-                   if(!value || value === '') {
-                             this.setError(key, this.customMessages[key]?.required || `This field is required`)
+                   if(!value || value === '' || value.length === 0) {
+                             this.setError(key, this.customMessages?.[key]?.required || `This field is required`)
                    }
           }
 
           length(key, value, params) {
+                    if(!value) return
                     const [min, max] = params
                     if(min && !max && value.length < min) {
-                              this.setError(key, this.customMessages[key]?.length || `Enter et least ${min} characters`)
+                              this.setError(key, this.customMessages?.[key]?.length || `Enter et least ${min} characters`)
                     } else if (!min && max && value.length > max) {
-                              this.setError(key, this.customMessages[key]?.length || `You can not exceed ${max} characters`)
+                              this.setError(key, this.customMessages?.[key]?.length || `You can not exceed ${max} characters`)
                     }else if((min && max ) && (value.length < min || value.length > max)) {
-                              this.setError(key, this.customMessages[key]?.length || `The value of this filed must be between ${min} and ${max}`)
+                              this.setError(key, this.customMessages?.[key]?.length || `The value of this field must be between ${min} and ${max}`)
                     }
           }
           match(key, value, params) {
+                    if(!value) return
                     if(this.data[params] !== value) {
-                              this.setError(key, this.customMessages[key]?.match || `Value does not match the ${params} value`)
+                              this.setError(key, this.customMessages?.[key]?.match || `Value does not match the ${params} value`)
                     }
           }
           username(key, value) {
+                    if(!value) return
                     const validUsername = /^[a-zA-Z0-9._]+$/.test(value)
                     if(!validUsername || value.length < 2) {
-                              this.setError(key, this.customMessages[key]?.username || 'Incorrect username (letters, numbers, point or underscore)')
+                              this.setError(key, this.customMessages?.[key]?.username || 'Incorrect username (letters, numbers, point or underscore)')
                     }
           }
           email(key, value) {
+                    if(!value) return
                     const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
                     if(!validEmail) {
-                              this.setError(key, this.customMessages[key]?.email || 'Incorrect email')
+                              this.setError(key, this.customMessages?.[key]?.email || 'Incorrect email')
+                    }
+          }
+
+          image(key, value, params) {
+                    if(!value) return
+                    const IMAGES_MIMES = ['image/jpeg', 'image/gif', 'image/png']
+                    if(value) {
+                              if(!IMAGES_MIMES.includes(value.type)) {
+                                        this.setError(key, this.customMessages?.[key]?.image || 'Please choose a valid image')
+                              } else if(params < value.size) {
+                                        const megaBite = (params - 1000000) / 1000000
+                                        this.setError(key, this.customMessages?.[key]?.size || `Your image is too large (max: ${megaBite} MB)`)
+                              }
                     }
           }
 

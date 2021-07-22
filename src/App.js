@@ -5,14 +5,15 @@ import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-d
 import { lazy, Suspense, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserAction } from './store/actions/userActions';
-import NewPost from './components/home/NewPost';
 import { Confirming } from './components/auth/Confirming';
 import { userSelector } from './store/selectors/userSelector';
 import SlimTopLoader from './components/main/SlimTopLoader'
+import AuthRoute from './components/auth/AuthRoute';
 
 
 const Register = lazy(() => import('./components/auth/Register'))
 const Login = lazy(() => import('./components/auth/Login'))
+const NewPost = lazy(() => import('./components/home/NewPost'))
 const Home = lazy(() => import('./components/home/Home'))
 const PostDetail = lazy(() => import('./components/Post/PostDetail'))
 const Posts = lazy(() => import('./components/Post/Posts'))
@@ -36,25 +37,9 @@ function App() {
                                                   <Route component={Posts} path="/posts/tag/:tagId" />
                                                   <Route component={Login} path="/login" />
                                                   <Route component={Register} path="/register" />
-                                                  <Route render={() =>
-                                                            user ? (
-                                                                      <NewPost />
-                                                            ) : (
-                                                                      <Redirect to="/login" />
-                                                            )
-                                                  }
-                                                            path="/addpost"
-                                                  />
-                                                  <Route render={() =>
-                                                            user ? (
-                                                                      <Profile />
-                                                            ) : (
-                                                                      <Redirect to="/login" />
-                                                            )
-                                                  }
-                                                            path="/profile"
-                                                  />
                                                   <Route component={Confirming} path="/confirm/:token" />
+                                                  <AuthRoute path="/addpost" component={NewPost} />
+                                                  <AuthRoute path="/profile" component={Profile} />
                                         </Switch>
                               </Suspense>
                               <Footer />

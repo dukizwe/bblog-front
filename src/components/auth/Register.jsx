@@ -1,26 +1,18 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
+import { useForm } from "../../hooks/useForm"
+import { useFormErrorsHandle } from "../../hooks/useFormErrorsHandle"
 import { setUserAction } from "../../store/actions/userActions"
-import Validation from '../../class/Validation'
 import EmailConfirm from './EmailConfirm'
 
 export default function Register() {
-          const [data, setData] = useState({
-                    username: 'john_doe',
-                    email: 'john@doe.fr',
-                    password: '12345678',
-                    passwordConfirm: '12345678'
+          const [data, handleChange] = useForm({
+                    username: '',
+                    email: '',
+                    password: '',
+                    passwordConfirm: ''
           })
-          const [errors, setErrors] = useState({})
-          const [userCreated, setUserCreated] = useState(false)
-
-          const dispatch = useDispatch()
-
-          const setError = (key, errors) => {
-                    setErrors({...errors, [key]: errors})
-          }
-
-          const validation = new Validation(data, {
+          const { errors, setErrors, getErrors, checkFieldData, isValidate, getError, hasError } = useFormErrorsHandle(data, {
                     username: 'required,username',
                     email: 'required,email',
                     password: {
@@ -39,29 +31,13 @@ export default function Register() {
                               match: 'Password does not match'
                     }
           })
+          const [userCreated, setUserCreated] = useState(false)
 
-          const checkFieldData = (e) => {
-                    const name = e.target.name
-                    const errors = validation.getError(name)
-                    if(errors?.length !== 0) {
-                              setError(name, errors)
-                    }
-          }
-
-          const hasError = name => errors[name] ? true : false
-
-          const getError = name => errors[name][0]
-
-          const handleChange = (e) => {
-                    const name = e.target.name
-                    const value = e.target.value
-                    setData(d => ({...d, [name]: value}))
-          }
+          const dispatch = useDispatch()
 
           const handleSubmit = async (e) => {
                     e.preventDefault()
-                    validation.run() 
-                    if(validation.isValidate()) {
+                    if(isValidate()) {
                               try {
                                         const response = await fetch('/api/users/register', {
                                                   method: "POST",
@@ -81,17 +57,19 @@ export default function Register() {
                                         console.log(error)
                               }
                     } else {
-                              const errors =  validation.getErrors()
+                              const errors =  getErrors()
                               setErrors(errors)
                     } 
           }
 
           const invalidClass = name => hasError(name) ? 'is-invalid': ''
           return (<div className="container py-5 d-flex justify-content-center">
+                    
                     <div className="content">
                               {userCreated ? <EmailConfirm email={data.email} /> :
                               <form className="form" onSubmit={handleSubmit}>
                                         <h1>Create new account</h1>
+                                        {JSON.stringify(errors)}
                                         <div className="form-group mt-2">
                                                   <input onChange={handleChange} onBlur={checkFieldData} value={data.username} type="text" className={`form-control ${invalidClass('username')}`} placeholder="Username"  name="username" />
                                                   {hasError('username') && <div className="invalid-feedback">{getError('username')}</div>}
