@@ -1,6 +1,6 @@
 import Header from './components/templates/Header';
 import Footer from './components/templates/Footer';
-import './css/style.scss'
+import './css/app/app.scss'
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { lazy, Suspense, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,21 +28,23 @@ function App() {
           return (
                     <>
                     <Router>
-                              <Header />
-                              <Suspense fallback={<SlimTopLoader />}>
-                                        <Switch>
-                                                  <Route exact component={Home} path='/' />
-                                                  <Route component={PostDetail} path="/post/:postId" />
-                                                  <Route exact component={Posts} path="/posts" />
-                                                  <Route component={Posts} path="/posts/tag/:tagId" />
-                                                  <Route component={Login} path="/login" />
-                                                  <Route component={Register} path="/register" />
-                                                  <Route component={Confirming} path="/confirm/:token" />
-                                                  <AuthRoute path="/addpost" component={NewPost} />
-                                                  <AuthRoute path="/profile" component={Profile} />
-                                        </Switch>
-                              </Suspense>
-                              <Footer />
+                              <div className="site-container">
+                                        <Header />
+                                        <Suspense fallback={<SlimTopLoader />}>
+                                                  <Switch>
+                                                            <Route exact component={Home} path='/' />
+                                                            <Route component={PostDetail} path="/post/:postId" />
+                                                            <Route exact component={Posts} path="/posts" />
+                                                            <Route component={Posts} path="/posts/tag/:tagId" />
+                                                            <Route component={Login} path="/login" />
+                                                            <Route component={Register} path="/register" />
+                                                            <Route component={Confirming} path="/confirm/:token" />
+                                                            <AuthRoute path="/addpost" component={NewPost} />
+                                                            <AuthRoute path="/profile" component={Profile} />
+                                                  </Switch>
+                                        </Suspense>
+                                        <Footer />
+                              </div>
                     </Router>
                     </>
           );

@@ -5,6 +5,8 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { unsetUserAction } from "../../store/actions/userActions";
 import {userSelector} from "../../store/selectors/userSelector"
 
+import '../../css/app/header.scss'
+
 export default function Header() {
           const user = useSelector(userSelector)
           const history = useHistory()
@@ -22,38 +24,38 @@ export default function Header() {
           }, [location, user, logOut])
           return (
           <header>
-                    <div className="navbar navbar-expand-lg navbar-dark bg-dark box-shadow">
-                              <div className="container d-flex justify-content-between">
-                                        <Link to="/"  className="navbar-brand d-flex align-items-center"><strong>Blog</strong></Link>
-                                        <ul className="navbar-nav">
-                                                  <li className="nav-item">
-                                                            <Link to="/posts"  className="nav-link"><strong>Posts</strong></Link>
-                                                  </li>
-                                                  <div className="d-flex">
-                                                            {user && (
-                                                                      <>
-                                                                      <li className="nav-item text-white">
-                                                                                <Link to="/profile" className="nav-link">{user?.username}</Link>
-                                                                      </li>
-                                                                      <li className="nav-item">
-                                                                                <button className="nav-link btn btn-danger" onClick={logOut}>Logout</button>
-                                                                      </li>
-                                                                      </>
-                                                            )}
-                                                            {!user && (
-                                                                      <>
-                                                                      <li className="nav-item">
-                                                                                <Link to="/login" className="nav-link btn btn-outline-secondary">Login</Link>
-                                                                      </li>
-                                                                      <li className="nav-item" style={{marginLeft: '5px'}}>
-                                                                                <Link to="/register" className="nav-link btn btn-outline-secondary">Register</Link>
-                                                                      </li>
-                                                                      </>
-                                                            )}
-                                                  </div>
-                                        </ul>
+                    <div className="navbar-left-side" /* className="container d-flex justify-content-between" */>
+                              <Link to="/" className="site-brand"  /* className="navbar-brand d-flex align-items-center" */><strong>bblog</strong></Link>
+                              <div className="searchbar">
+                                        <div className="icon">
+                                                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                                  </svg>
+                                        </div>
+                                        <input type="search" className="search-form" placeholder="Search posts..."/>
                               </div>
                     </div>
+                    <nav className="navbar-right-side">
+                              <Link to="/posts"  className="link">Posts</Link>
+                              <Link to="/posts"  className="link">Categories</Link>
+                              <div className="item connection">
+                                        {user && (
+                                                  <>
+                                                            <ul className="connected-user">
+                                                                      <li className="user">
+                                                                                <Link to="/profile" className="user-link">{user?.username}</Link>
+                                                                      </li>
+                                                                      <li className="user-logout">
+                                                                                <button className="user-logout-link" onClick={logOut}>Logout</button>
+                                                                      </li>
+                                                            </ul>
+                                                  </>
+                                        )}
+                                        {!user && (
+                                                  <Link to="/login" className="to-login">Sign in</Link>
+                                        )}
+                              </div>
+                    </nav>
           </header>
           )
 }

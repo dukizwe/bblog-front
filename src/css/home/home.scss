@@ -1,0 +1,39 @@
+section {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .hero {
+                    width: 100%;
+                    .hero__container {
+                              width: max-content;
+                    }
+                    .hero__container .hero__text {
+                              h1 {
+                                        margin-bottom: 0;
+                                        font-weight: 400;
+                              }
+                    }
+                    .hero__container .hero__action {
+                              text-align: center;
+                              margin-top: 50px;
+                              a.to-register {
+                                        font-size: 18px;
+                                        padding: 0.3rem 1rem 0.5rem 1rem;
+                                        border: 1px solid #007BFF;
+                                        border-radius: 5px;
+                                        transition: background 0.3s ease-in-out;
+                                        color: #007BFF;
+                                        &:hover, &:focus {
+                                                  background: #ced8e6;
+                                        }
+                              };
+                              p {
+                                        margin-top: 5px;
+                                        color: #4e4d4d;
+                              }
+                    }
+          }
+          .banner {
+                    width: 100%;
+          }
+}

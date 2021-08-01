@@ -1,0 +1,72 @@
+header {
+          width: 100%;
+          height: 87px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .navbar-left-side {
+                    display: flex;
+                    align-items: baseline;
+                    .site-brand {
+                              color: #007BFF;
+                              font-size: 30px;
+                    }
+                    .searchbar {
+                              margin-left: 20px;
+                              height: 40px;
+                              min-width: 400px;
+                              box-shadow: 0 5px 20px -5px rgb(0 0 0 / 7%);
+                              display: flex;
+                              align-items: center;
+                              position: relative;
+                    }
+                    .searchbar .icon {
+                              color: #ddd;
+                              position: absolute;
+                              left: 12px;
+                              bottom: 9px;
+                    }
+                    .searchbar .search-form {
+                              border: 1px solid transparent;
+                              background: none;
+                              outline: none;
+                              padding: 10px;
+                              padding-left: 2.5rem;
+                              width: 100%;
+                              height: 100%;
+                              background: #fff;
+                              border-radius: 5px;
+                              transition: border 0.3s ease-in-out;
+                              &:focus {
+                                        border: 1px solid #007BFF;
+                              }
+                    }
+          }
+          .navbar-right-side {
+                    display: flex;
+                    align-items: center;
+                    .link {
+                              font-size: 18px;
+                              padding: .5rem 1rem;
+                              color: #0d6efd;
+                              transition: color .15s ease-in-out;
+                              &:hover {
+                                        color: #212529;
+                              }
+                    }
+                    .connection {
+                              a.to-login {
+                                        font-size: 18px;
+                                        padding: 0.3rem 1rem 0.5rem 1rem;
+                                        background: #007BFF;
+                                        border-radius: 5px;
+                                        box-shadow: 0 2px 3px 0 #ccc;
+                                        transition: background 0.3s ease-in-out;
+                                        color: #fff;
+                                        &:hover, &:focus {
+                                                  background: #0050c5;
+                                        }
+                              }
+                    }
+          }
+}

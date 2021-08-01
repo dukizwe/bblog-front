@@ -1,0 +1,23 @@
+body, html {
+          background: #F2F5FE;
+}
+a {
+          color: inherit;
+          text-decoration: none;
+}
+@media only screen and (min-width: 1200px) {
+          .site-container {
+                    width: 1140px;
+                    margin: 0 auto;
+          }
+}
+a.post-link {
+          text-decoration: none;
+          color: inherit;
+}
+.swiper-slide {
+          height: 280px;
+          .card {
+                    height: 100%;
+          }
+}
