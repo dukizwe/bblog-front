@@ -1,0 +1,32 @@
+.top__posts {
+          background: #f8f9fa;
+          padding: 5px;
+          .categories {
+                    margin: 5px 0;
+                    .category {
+                              width: max-content;
+                              button {
+                                        outline: none;
+                                        background: #fff;
+                                        color: #212529;
+                                        padding: 5px 10px;
+                                        border: 1px solid #ddd;
+                                        border-radius: 10px;
+                                        &.active {
+                                                  color: #007BFF;
+                                                  border: none;
+                                                  border-radius: none;
+                                                  border-bottom: 1px solid #007BFF;
+                                                  border-radius: 0;
+                                                  background: transparent;
+                                        }
+                              }
+                    }
+          }
+          .posts {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    grid-template-rows: repeat(2, 293px);
+                    grid-gap: 20px;
+          }
+}

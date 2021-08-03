@@ -1,5 +1,4 @@
-import "../../css/home.scss"
-import LatestPosts from "../Post/LatestPosts"
+import TopPosts from "../home/TopPosts"
 import { Link } from "react-router-dom";
 import Lottie from "react-lottie-player";
 import bannerJson from '../../lottie/banner.json'
@@ -36,7 +35,7 @@ export default function Home() {
                                         />
                               </div>
                     </section>
-                    <LatestPosts />
+                    <TopPosts />
           </main>
           </>
           )
