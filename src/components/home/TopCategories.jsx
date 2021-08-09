@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { useResistFetch } from "../../hooks/useResistFetch"
-import { addCategoriesAction } from "../../store/actions/categoryActions"
+import { addCategoriesAction, setCategory } from "../../store/actions/categoryActions"
 import { addTopPostsAction } from "../../store/actions/postActions"
-import { categoriesSelector } from "../../store/selectors/categorySelectors"
+import { categoriesSelector, selectedCategorySelector } from "../../store/selectors/categorySelectors"
 import Skeleton from "../main/Skeleton"
 
 const LIMIT = 20
@@ -26,7 +26,7 @@ const Skeletons = () => {
 
 export default function TopCategories({ setPostsLoading, secondPostsLoading}) {
           const dispatch = useDispatch()
-          const [selectedCategory, setSelectedCategory] = useState(null)
+          const selectedCategory = useSelector(selectedCategorySelector)
           const [loading,  categories] = useResistFetch(`/api/categories?limit=${LIMIT}`, categoriesSelector, addCategoriesAction)
 
           const handleCategoryChange = async (e, category) => {
@@ -37,7 +37,7 @@ export default function TopCategories({ setPostsLoading, secondPostsLoading}) {
                     let url = `/api/posts?limit=8`
                     if(category) url += `&category=${category._id}`
 
-                    setSelectedCategory(category)
+                    dispatch(setCategory(category))
                     e.target.classList.add('active')
                     setPostsLoading(true)
                     const response = await fetch(url)

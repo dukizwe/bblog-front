@@ -1,12 +1,11 @@
 import Header from './components/templates/Header';
 import Footer from './components/templates/Footer';
 import './css/app/app.scss'
-import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { lazy, Suspense, useLayoutEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUserAction } from './store/actions/userActions';
 import { Confirming } from './components/auth/Confirming';
-import { userSelector } from './store/selectors/userSelector';
 import SlimTopLoader from './components/main/SlimTopLoader'
 import AuthRoute from './components/auth/AuthRoute';
 
@@ -24,7 +23,6 @@ function App() {
           useLayoutEffect(() => {
                     dispatch(setUserAction(JSON.parse(localStorage.getItem('user'))))
           }, [dispatch])
-          const user = useSelector(userSelector)
           return (
                     <>
                     <Router>

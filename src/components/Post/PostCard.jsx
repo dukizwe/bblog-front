@@ -11,7 +11,7 @@ export default memo(function PostCard({ post }) {
                               <Link to={`/post/${post._id}`}>
                               {/* {post.image && <Link to={`/post/${post._id}`} className="post-link"><img className="card-img-top" src={`http://localhost:8080/uploads/posts/${post.image}`} alt={post.title} /></Link>} */}
                               <div className="image">
-                                        <img src={`http://localhost:8080/uploads/posts/1627416007607_thumb.webp`} alt={post.title} />
+                                        <img src={`http://localhost:8080/uploads/posts/${post.image.name}_thumb${post.image.extension}`} alt={post.title} />
                               </div>
                               <div className="body">
                                         <h5 className="title">{subText(post.title, 50)}</h5>
