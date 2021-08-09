@@ -3,23 +3,37 @@ import { useResistFetch } from "../../hooks/useResistFetch";
 import { topPostsSelectors } from "../../store/selectors/postsSelector";
 import { addTopPostsAction } from "../../store/actions/postActions";
 import TopCategories from "./TopCategories";
+import Skeleton from "../main/Skeleton";
 
 import 'swiper/swiper.scss';
 import '../../css/home/topPosts.scss'
+import { useState } from "react";
+
+const LIMIT = 8
+
+const Skeletons = () => {
+          const fakePosts = []
+          for (let i = 1; i <= LIMIT ; i++) {
+                    fakePosts.push(i)
+          }
+          return  fakePosts.map(post => <div className="post__card" key={post}><Skeleton width="100%" height="100%" /></div>)
+}
 
 export default function TopPosts() {
-          const [loadingTopPosts, topPosts] = useResistFetch('/api/posts?limit=8', topPostsSelectors, addTopPostsAction)
+          const [secondPostsLoading, setLoading] = useState(false)
+          const [loadingTopPosts, topPosts] = useResistFetch(`/api/posts?limit=${LIMIT}`, topPostsSelectors, addTopPostsAction)
 
           let postsCards = topPosts.map(post => {
                     return <PostCard post={post} key={post._id}/>
           })
+          const blockedCls = secondPostsLoading ? 'blocked' : ''
           return (
                     <div className="top__posts">
                               <div className="posts__container">
-                                        <h4>Top posts</h4>{loadingTopPosts && <div>loading ...</div>}
-                                        <TopCategories />
-                                        <div className="posts">
-                                                  {!loadingTopPosts && postsCards}
+                                        <h4>Top posts</h4>
+                                        <TopCategories setPostsLoading={setLoading} secondPostsLoading={secondPostsLoading} />
+                                        <div className={`posts ${blockedCls}`}>
+                                                  {loadingTopPosts ? <Skeletons /> : postsCards}
                                         </div>
                               </div>
                     </div>

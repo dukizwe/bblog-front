@@ -17,7 +17,7 @@ export function postReducer(state = initials, action) {
                     case PREPEND_POSTS_ACTION:
                               return {...state, posts: [action.payload, ...state.posts]}
                     case ADD_TOP_POSTS_ACTION:
-                              return {...state, topPosts: [...state.topPosts, ...action.payload]}
+                              return {...state, topPosts: action.payload}
                     default:
                               return state
           }

@@ -7,6 +7,7 @@ import "../../css/home/home.scss"
 
 export default function Home() {
           return (
+              
           <>
           <main role="main">
                     <section>

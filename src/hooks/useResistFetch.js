@@ -28,5 +28,5 @@ export function useResistFetch(url, selector, action, exception = false) {
                               setLoading(false)
                     }
           }, [exception, fetchPosts, canIFetch])
-          return [loading, data]
+          return [loading, data, setLoading]
 }
