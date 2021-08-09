@@ -4,15 +4,31 @@ import { subText } from "../../helpers/functions";
 import { minNumber } from "../../helpers/functions";
 
 import '../../css/post/postCard.scss'
+import { useRef } from "react";
+import { useEffect } from "react";
+
+function PostImage ({ image }) {
+          const imageRef = useRef(null)
+
+          useEffect(() => {
+                    const imageSrc = `http://localhost:8080/uploads/posts/${image.name}_thumb${image.extension}`
+                    let JSimage = new Image()
+                    JSimage.src = imageSrc
+                    JSimage.onload = function () {
+                              imageRef.current.innerHTML = `<img src=${JSimage.src} alt=${imageSrc} />`
+                    }
+          })
+          return <div className="image" ref={imageRef}>
+                    <div className="loader"></div>
+          </div>
+}
 
 export default memo(function PostCard({ post }) {
           return (
                     <div className="post__card">
                               <Link to={`/post/${post._id}`}>
                               {/* {post.image && <Link to={`/post/${post._id}`} className="post-link"><img className="card-img-top" src={`http://localhost:8080/uploads/posts/${post.image}`} alt={post.title} /></Link>} */}
-                              <div className="image">
-                                        <img src={`http://localhost:8080/uploads/posts/${post.image.name}_thumb${post.image.extension}`} alt={post.title} />
-                              </div>
+                              <PostImage image={post.image} />
                               <div className="body">
                                         <h5 className="title">{subText(post.title, 50)}</h5>
 {/*                                         <div className="mb-2">
