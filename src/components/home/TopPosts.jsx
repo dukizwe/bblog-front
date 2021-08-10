@@ -1,13 +1,15 @@
 import PostCard from "../Post/PostCard"
 import { useResistFetch } from "../../hooks/useResistFetch";
 import { topPostsSelectors } from "../../store/selectors/postsSelector";
-import { addTopPostsAction } from "../../store/actions/postActions";
+import { appendTopPostsAction } from "../../store/actions/postActions";
 import TopCategories from "./TopCategories";
 import Skeleton from "../main/Skeleton";
 
 import 'swiper/swiper.scss';
 import '../../css/home/topPosts.scss'
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectedCategorySelector } from "../../store/selectors/categorySelectors";
 
 const LIMIT = 8
 
@@ -21,9 +23,10 @@ const Skeletons = () => {
 
 export default function TopPosts() {
           const [secondPostsLoading, setLoading] = useState(false)
-          const [loadingTopPosts, topPosts] = useResistFetch(`/api/posts?limit=${LIMIT}`, topPostsSelectors, addTopPostsAction)
+          const [loadingTopPosts, topPosts] = useResistFetch(`/api/posts?limit=${LIMIT}`, topPostsSelectors, appendTopPostsAction)
+          const selectedCategoryKey = useSelector(selectedCategorySelector)?._id || 'all'
 
-          let postsCards = topPosts.map(post => {
+          let postsCards = topPosts[selectedCategoryKey]?.map(post => {
                     return <PostCard post={post} key={post._id}/>
           })
           const blockedCls = secondPostsLoading ? 'blocked' : ''

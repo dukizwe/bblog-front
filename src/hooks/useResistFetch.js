@@ -19,7 +19,7 @@ export function useResistFetch(url, selector, action, exception = false) {
                     }
           })(), [url, dispatch, action])
 
-          const canIFetch = !data || data.length === 0
+          const canIFetch = !data || data.length === 0 || (Object.keys(data).length === 0 && data.constructor === Object)
 
           useEffect(() => {
                     if(canIFetch || exception) {

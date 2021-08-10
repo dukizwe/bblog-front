@@ -1,10 +1,11 @@
-import { useState } from "react"
+import { memo } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { useResistFetch } from "../../hooks/useResistFetch"
 import { addCategoriesAction, setCategory } from "../../store/actions/categoryActions"
-import { addTopPostsAction } from "../../store/actions/postActions"
+import { appendTopPostsAction } from "../../store/actions/postActions"
 import { categoriesSelector, selectedCategorySelector } from "../../store/selectors/categorySelectors"
+import { topPostsSelectors } from "../../store/selectors/postsSelector"
 import Skeleton from "../main/Skeleton"
 
 const LIMIT = 20
@@ -23,28 +24,33 @@ const Skeletons = () => {
                               {fakeCategories.map(category => <SwiperSlide key={category} className="category"><Skeleton width="100px" height="36px" /></SwiperSlide>)}
                     </Swiper>
 }
-
 export default function TopCategories({ setPostsLoading, secondPostsLoading}) {
+          console.log('top categories')
           const dispatch = useDispatch()
           const selectedCategory = useSelector(selectedCategorySelector)
           const [loading,  categories] = useResistFetch(`/api/categories?limit=${LIMIT}`, categoriesSelector, addCategoriesAction)
+          const topPosts = useSelector(topPostsSelectors)
 
           const handleCategoryChange = async (e, category) => {
                     e.preventDefault()
-                    e.target.parentNode.parentNode.querySelectorAll('button.active').forEach(button => {
-                              button.classList.remove('active')
-                    });
                     let url = `/api/posts?limit=8`
                     if(category) url += `&category=${category._id}`
-
-                    dispatch(setCategory(category))
-                    e.target.classList.add('active')
+                    const toSelectCategoryKey = category ? category._id : 'all'
                     setPostsLoading(true)
-                    const response = await fetch(url)
-                    const posts = await response.json()
+                    if(topPosts[toSelectCategoryKey]) {
+                              var posts = topPosts[toSelectCategoryKey]
+                    } else {
+                              var response = await fetch(url)
+                              var posts = await response.json()
+                    }
                     setPostsLoading(false)
-                    if(response.ok) {
-                              dispatch(addTopPostsAction(posts))
+                    if(response?.ok || topPosts[toSelectCategoryKey]) {
+                              e.target.parentNode.parentNode.querySelectorAll('button.active').forEach(button => {
+                                        button.classList.remove('active')
+                              });
+                              e.target.classList.add('active')
+                              dispatch(setCategory(category))
+                              dispatch(appendTopPostsAction(posts, category))
                     }
           }
           const blocked = secondPostsLoading ? 'blocked' : ''

@@ -1,4 +1,4 @@
-import { APPEND_POSTS_ACTION, ADD_TOP_POSTS_ACTION, ADD_POSTS_ACTION, PREPEND_POSTS_ACTION } from '../reducers/postReducer'
+import { APPEND_POSTS_ACTION, APPEND_TOP_POSTS_ACTION, ADD_POSTS_ACTION, PREPEND_POSTS_ACTION } from '../reducers/postReducer'
 
 export const appendPostsAction = (posts) => {
           return {
@@ -21,9 +21,13 @@ export const addPostsAction = (posts) => {
           }
 }
 
-export const addTopPostsAction = (posts) => {
+export const appendTopPostsAction = (posts, category) => {
+          const categoryKey = category ? category._id : 'all'
+          const postsWithCategory = {
+                    [categoryKey]: posts
+          }
           return {
-                    type: ADD_TOP_POSTS_ACTION,
-                    payload: posts
+                    type: APPEND_TOP_POSTS_ACTION,
+                    payload: postsWithCategory
           }
 }
