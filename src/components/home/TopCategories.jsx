@@ -25,7 +25,6 @@ const Skeletons = () => {
                     </Swiper>
 }
 export default function TopCategories({ setPostsLoading, secondPostsLoading}) {
-          console.log('top categories')
           const dispatch = useDispatch()
           const selectedCategory = useSelector(selectedCategorySelector)
           const [loading,  categories] = useResistFetch(`/api/categories?limit=${LIMIT}`, categoriesSelector, addCategoriesAction)

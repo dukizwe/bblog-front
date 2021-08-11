@@ -4,6 +4,7 @@ import Lottie from "react-lottie-player";
 import bannerJson from '../../lottie/banner.json'
 
 import "../../css/home/home.scss"
+import { useRef } from "react";
 
 export default function Home() {
           return (
@@ -22,10 +23,6 @@ export default function Home() {
                                                             <p>and explore</p>
                                                   </div>
                                         </div>
-{/*                                         <p>
-                                                  <Link to="/posts" className="btn btn-primary my-2">All posts</Link>
-                                                  <Link to="/addpost" className="btn btn-secondary my-2 m-2">New post</Link>
-                                        </p> */}
                               </div>
                               <div className="banner">
                                         <Lottie
