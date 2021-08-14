@@ -1,0 +1,329 @@
+.article__container {
+          width: 100%;
+          margin: auto;
+          .article__header {
+                    margin: 20px 0;
+                    .title {
+                              width: 95%;
+                              margin: auto;
+                              text-align: center;
+                              font-size: 2.5rem;
+                    }         
+          }
+          .image__container {
+                    width: 100%;
+                    margin-bottom: 20px;
+                    .image {
+                              width: max-content;
+                              margin: auto;
+                    }
+                    .image img {
+                              width: auto;
+                              height: auto;
+                              max-width: 100%;
+                              max-height: 620px;
+                              border-radius: 5px;
+                              object-fit: cover;
+                    }
+          }
+          .article__row {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    grid-template-rows: 1fr;
+                    grid-template-areas: 
+                              "content content sidebar";
+                    grid-column-gap: 30px;
+                    .article__content  {
+                              grid-area: content;
+                              font-size: 18px;
+                    }
+                    .article__description  {
+                              grid-area: sidebar;
+                              .title {
+                                        font-size: 1rem;
+                                        font-weight: 800;
+                                        color: #3f3f3f;
+                                        margin-top: 10px;
+                              }
+                              .author__report {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: space-between;
+                              }
+                              .article__author .author {
+                                        display: flex;
+                                        align-items: center;
+                              }
+                              .article__author .author .image {
+                                        width: 40px;
+                                        height: 40px;
+                                        border-radius: 50%;
+                                        background: #fff;
+                                        border: 1px solid #969696;
+                                        &.image__empty img {
+                                                  transform: scale(1.1);
+                                        }
+                                        img {
+                                                  width: 100%;
+                                                  height: 100%;
+                                                  object-fit: contain;
+                                        }
+                              }
+                              .article__author .author .name {
+                                        margin-left: 2px;
+                                        font-size: 17px;
+                              }
+                              .article__author .author .date {
+                                        color: #6c757d;
+                              }
+                              button.report-comment {
+                                        outline: none;
+                                        border-radius: 5px;
+                                        background: #fff;
+                                        color: #333;
+                                        padding: 2px 10px 5px 10px;
+                                        border: 1px solid #ddd;
+                                        border-radius: 10px;
+                                        transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+                                        &:hover, &:focus {
+                                                  background: #dcdcdc;
+                                                  border: 1px solid #ddd;
+                                        }
+                              }
+
+                              .article__reactions {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: space-between;
+                                        margin-top: 10px;
+                                        .reactions {
+                                                  display: flex;
+                                                  align-items: center;
+                                        }
+                                        .reactions .likes__count, .reactions .dislikes__count, .share {
+                                                  display: flex;
+                                                  align-items: center;
+                                                  button {
+                                                            outline: none;
+                                                            border-radius: 5px;
+                                                            background: #fff;
+                                                            color: #333;
+                                                            padding: 5px 10px;
+                                                            border: 1px solid #ddd;
+                                                            border-radius: 10px;
+                                                            transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+                                                            &:hover, &:focus {
+                                                                      background: #dcdcdc;
+                                                                      border: 1px solid #ddd;
+                                                            }
+                                                  }
+                                                  span {
+                                                            margin-left: 5px;
+                                                  }
+                                        }
+                                        .reactions .dislikes__count, .reactions .share {
+                                                  margin-left: 5px;
+                                        }
+                                        .comments {
+                                                  a {
+                                                            color: #757575;
+                                                            transition: color .2s ease-in-out;
+                                                            &:hover, &:focus {
+                                                                      color: #212529;
+                                                            }
+                                                  }
+                                        }
+                              }
+                              .article__outline  {
+                                        .title {
+                                                  margin: 10px 0 5px 0;
+                                        }
+                                        h5 {
+                                                  font-size: 18px;
+                                                  margin-bottom: 15px;
+                                                  &.active a {
+                                                            color: #007BFF;
+                                                            border-bottom: 1px solid #007BFF;
+                                                            &:hover, &:focus {
+                                                                      color: #007BFF;
+                                                            }
+                                                  }
+                                                  a {
+                                                            transition: color .2s ease-in-out;
+                                                            &:hover, &:focus {
+                                                                      color: #8d8d8d;
+                                                            }
+                                                  }
+                                        }
+                              }
+
+                              .link-group {
+                                        display: flex;
+                                        flex-wrap: wrap;
+                                        a.link-group-item {
+                                                  background: #fff;
+                                                  color: #333;
+                                                  padding: 5px 10px;
+                                                  border: 1px solid #ddd;
+                                                  border-radius: 10px;
+                                                  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+                                                  margin: 2px;
+                                                  &.active {
+                                                            color: #007BFF;
+                                                            background: #ced8e6;
+                                                  }
+                                                  &:hover, &:focus {
+                                                            background: #dcdcdc;
+                                                  }
+                                        }
+                              }
+                              .article__categories {
+                                        margin-top: 10px;
+                              }
+                              .article__comments {
+                                        .form-row {
+                                                  display: flex;
+                                        }
+                                        .form-row .user {
+                                                  width: 30px;
+                                                  height: 30px;
+                                                  background: #fff;
+                                                  border-radius: 50%;
+                                                  img {
+                                                            width: 100%;
+                                                            height: 100%;
+                                                            object-fit: contain;
+                                                  }
+                                        }
+                                        .form-row .form {
+                                                  flex: 1;
+                                                  textarea {
+                                                            border: 1px solid #d7eaff;
+                                                            background: none;
+                                                            outline: none;
+                                                            padding: 5px 10px;
+                                                            width: 100%;
+                                                            height: 100%;
+                                                            background: #fff;
+                                                            border-radius: 5px;
+                                                            transition: border 0.3s ease-in-out;
+                                                            resize: none;
+                                                            margin-left: 5px;
+                                                            width: 100%;
+                                                            color: #333;
+                                                            &:focus {
+                                                                      border: 1px solid #007BFF;
+                                                            }
+                                                  }
+                                                  .form__send {
+                                                            text-align: right;
+                                                            button {
+                                                                      border: 1px solid #007BFF;
+                                                                      border-radius: 5px;
+                                                                      outline: none;
+                                                                      color: #007BFF;
+                                                                      padding: 5px 10px;
+                                                                      background: transparent;
+                                                                      transition: background 0.3s ease-in-out, border 0.3s ease-in-out;
+                                                                      &:hover, &:focus {
+                                                                                background: #d7eaff;
+                                                                                border-color: transparent;
+                                                                      }
+                                                            }
+                                                  }
+                                        }
+                                        .all-comments .comment {
+                                                  margin-top: 10px; 
+                                                  background: #fff;
+                                                  padding: 5px;
+                                                  border-radius: 5px;
+                                        }
+                                        .all-comments .comment .comment-header {
+                                                  display: flex;
+                                                  align-items: center;
+                                                  justify-content: space-between;
+                                                  .user {
+                                                            display: flex;
+                                                            align-items: center;
+                                                            .user-avatar {
+                                                                      width: 40px;
+                                                                      height: 40px;
+                                                                      background: #fff;
+                                                                      border-radius: 50%;
+                                                                      img {
+                                                                                width: 100%;
+                                                                                height: 100%;
+                                                                                object-fit: contain;
+                                                                      }
+                                                            }
+                                                            .user-name__date {
+                                                                      margin-left: 5px;
+                                                                      .name {
+                                                                                display: flex;
+                                                                                align-items: center;
+                                                                      }
+                                                                      .name span.is__author {
+                                                                                border: 1px solid #007BFF;
+                                                                                padding: 1px 3px;
+                                                                                border-radius: 5px;
+                                                                                color: #007BFF;
+                                                                                font-size: 13px;
+                                                                      }
+                                                            }
+                                                            .user-name__date .date {
+                                                                      color: #757575;
+                                                                      font-size: 14px;
+                                                            }
+                                                  }
+                                                  button.report-comment {
+                                                            outline: none;
+                                                            border-radius: 5px;
+                                                            background: #fff;
+                                                            color: #333;
+                                                            padding: 2px 10px 5px 10px;
+                                                            border: 1px solid #ddd;
+                                                            border-radius: 10px;
+                                                            transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+                                                            &:hover, &:focus {
+                                                                      background: #dcdcdc;
+                                                                      border: 1px solid #ddd;
+                                                            }
+                                                  }
+                                        }
+                                        .all-comments .comment .comments__actions {
+                                                            display: flex;
+                                                            align-items: center;
+                                                            margin-top: 5px;
+                                                            .likes__count, .dislikes__count, .comments__count {
+                                                                      display: flex;
+                                                                      align-items: center;
+                                                                      button {
+                                                                                outline: none;
+                                                                                border-radius: 5px;
+                                                                                background: #fff;
+                                                                                color: #333;
+                                                                                padding: 3px 20px;
+                                                                                border: 1px solid #ddd;
+                                                                                border-radius: 10px;
+                                                                                transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+                                                                                &:hover, &:focus {
+                                                                                          background: #dcdcdc;
+                                                                                          border: 1px solid #ddd;
+                                                                                }
+                                                                      }
+                                                                      span {
+                                                                                margin-left: 5px;
+                                                                      }
+                                                            }
+                                                            .dislikes__count {
+                                                                      margin-left: 5px;
+                                                            }
+                                                            .comments__count {
+                                                                      margin-left: 5px;
+                                                            }
+                                        }
+                              }
+                    }
+          }
+
+}

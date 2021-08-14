@@ -8,11 +8,12 @@ import '../../css/post/postCard.scss'
 import { useRef } from "react";
 import { useEffect } from "react";
 
-function PostImage ({ image }) {
+export function PostImage ({ image, isThumb = true }) {
           const imageRef = useRef(null)
 
           useEffect(() => {
-                    const imageSrc = `http://localhost:8080/uploads/posts/${image.name}_thumb${image.extension}`
+                    const thumb = isThumb ? '_thumb' : ''
+                    const imageSrc = `http://localhost:8080/uploads/posts/${image.name}${thumb}${image.extension}`
                     let JSimage = new Image()
                     JSimage.src = imageSrc
                     JSimage.onload = function () {
@@ -79,9 +80,6 @@ export default memo(function PostCard({ post }) {
                                                                                 <div className="count">{minNumber(post.reactions.comments)}</div>
                                                                       </div>
                                                                       {/* <small className="text-muted">{moment(post.createdAt).fromNow()}</small> */}
-                                                            </div>
-                                                            <div className="post__action">
-
                                                             </div>
                                                   </div>
                                                   </Link>
