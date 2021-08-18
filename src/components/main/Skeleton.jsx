@@ -3,5 +3,5 @@ import "../../css/app/skeleton.scss"
 export default function Skeleton(props) {
           return <div className="skeleton" style={
                     {...props}
-          }></div>
+          }>{props.children}</div>
 }

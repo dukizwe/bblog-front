@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import { subText } from "../../helpers/functions";
 import { minNumber } from "../../helpers/functions";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import Skeleton from "../main/Skeleton";
 
 import '../../css/post/postCard.scss'
 import { useRef } from "react";
 import { useEffect } from "react";
+import { useState } from "react";
 
-export function PostImage ({ image, isThumb = true }) {
+export function PostImage ({ image, isThumb = true, skeletonHeight = "100%"}) {
           const imageRef = useRef(null)
 
           useEffect(() => {
@@ -17,11 +19,14 @@ export function PostImage ({ image, isThumb = true }) {
                     let JSimage = new Image()
                     JSimage.src = imageSrc
                     JSimage.onload = function () {
+                              imageRef.current.classList.add('loaded')
                               imageRef.current.innerHTML = `<img src=${JSimage.src} alt=${imageSrc} />`
                     }
           })
           return <div className="image" ref={imageRef}>
-                    <div className="loader"></div>
+                    <Skeleton width="100%" height={skeletonHeight}>
+                              <div className="loader"></div>
+                    </Skeleton>
           </div>
 }
 

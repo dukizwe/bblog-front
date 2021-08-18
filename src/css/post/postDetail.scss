@@ -14,8 +14,12 @@
                     width: 100%;
                     margin-bottom: 20px;
                     .image {
-                              width: max-content;
+                              width: 100%;
                               margin: auto;
+                              position: relative;
+                              &.loaded {
+                                        width: max-content;
+                              }
                     }
                     .image img {
                               width: auto;

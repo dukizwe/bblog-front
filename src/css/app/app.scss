@@ -35,10 +35,6 @@ a.post-link {
           border: 2px solid #ddd;
           border-radius: 50%;
           border-top: 2px solid #01aeff;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
           animation: spin 0.3s linear infinite;
 }
 @keyframes spin {
