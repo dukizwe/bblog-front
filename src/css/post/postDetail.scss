@@ -115,10 +115,18 @@
                                                             padding: 5px 10px;
                                                             border: 1px solid #ddd;
                                                             border-radius: 10px;
-                                                            transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+                                                            transition: background 0.3s ease-in-out, color 0.3s ease-in-out ,border 0.3s ease-in-out, opacity 0.3s ease-in-out;
+                                                            min-width: 76px;
+                                                            &.voted {
+                                                                      color: #007BFF;
+                                                                      border: 1px solid #007BFF;
+                                                            }
                                                             &:hover, &:focus {
                                                                       background: #dcdcdc;
-                                                                      border: 1px solid #ddd;
+                                                            }
+                                                            &:disabled {
+                                                                      opacity: .6;
+                                                                      pointer-events: none;
                                                             }
                                                   }
                                                   span {
@@ -298,7 +306,7 @@
                                                             display: flex;
                                                             align-items: center;
                                                             margin-top: 5px;
-                                                            .likes__count, .dislikes__count, .comments__count {
+                                                            .likes__count, .dislikes__count, .replies__count {
                                                                       display: flex;
                                                                       align-items: center;
                                                                       button {
@@ -310,9 +318,17 @@
                                                                                 border: 1px solid #ddd;
                                                                                 border-radius: 10px;
                                                                                 transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+                                                                                &.voted {
+                                                                                          color: #007BFF;
+                                                                                          border: 1px solid #007BFF;
+                                                                                }
                                                                                 &:hover, &:focus {
                                                                                           background: #dcdcdc;
                                                                                           border: 1px solid #ddd;
+                                                                                }
+                                                                                &:disabled {
+                                                                                          opacity: .6;
+                                                                                          pointer-events: none;
                                                                                 }
                                                                       }
                                                                       span {
@@ -322,7 +338,7 @@
                                                             .dislikes__count {
                                                                       margin-left: 5px;
                                                             }
-                                                            .comments__count {
+                                                            .replies__count {
                                                                       margin-left: 5px;
                                                             }
                                         }

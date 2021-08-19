@@ -23,7 +23,7 @@ const Skeletons = () => {
 
 export default function TopPosts() {
           const [secondPostsLoading, setLoading] = useState(false)
-          const [loadingTopPosts, topPosts] = useResistFetch(`/api/posts?limit=${LIMIT}`, topPostsSelectors, appendTopPostsAction)
+          const [loadingTopPosts, topPosts] = useResistFetch(`/posts?limit=${LIMIT}`, topPostsSelectors, appendTopPostsAction)
           const selectedCategoryKey = useSelector(selectedCategorySelector)?._id || 'all'
 
           let postsCards = topPosts[selectedCategoryKey]?.map(post => {

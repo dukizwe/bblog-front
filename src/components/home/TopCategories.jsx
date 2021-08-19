@@ -1,6 +1,7 @@
 import { memo } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Swiper, SwiperSlide } from "swiper/react"
+import { fetchApi } from "../../helpers/functions"
 import { useResistFetch } from "../../hooks/useResistFetch"
 import { addCategoriesAction, setCategory } from "../../store/actions/categoryActions"
 import { appendTopPostsAction } from "../../store/actions/postActions"
@@ -27,23 +28,26 @@ const Skeletons = () => {
 export default function TopCategories({ setPostsLoading, secondPostsLoading}) {
           const dispatch = useDispatch()
           const selectedCategory = useSelector(selectedCategorySelector)
-          const [loading,  categories] = useResistFetch(`/api/categories?limit=${LIMIT}`, categoriesSelector, addCategoriesAction)
+          const [loading,  categories] = useResistFetch(`/categories?limit=${LIMIT}`, categoriesSelector, addCategoriesAction)
           const topPosts = useSelector(topPostsSelectors)
 
           const handleCategoryChange = async (e, category) => {
                     e.preventDefault()
-                    let url = `/api/posts?limit=8`
+                    let url = `/posts?limit=8`
                     if(category) url += `&category=${category._id}`
                     const toSelectCategoryKey = category ? category._id : 'all'
                     setPostsLoading(true)
                     if(topPosts[toSelectCategoryKey]) {
                               var posts = topPosts[toSelectCategoryKey]
                     } else {
-                              var response = await fetch(url)
-                              var posts = await response.json()
+                              try {
+                                        var posts = await fetchApi(url)
+                              } catch(error) {
+                                        console.log(error)
+                              }
                     }
                     setPostsLoading(false)
-                    if(response?.ok || topPosts[toSelectCategoryKey]) {
+                    if(posts || topPosts[toSelectCategoryKey]) {
                               e.target.parentNode.parentNode.querySelectorAll('button.active').forEach(button => {
                                         button.classList.remove('active')
                               });

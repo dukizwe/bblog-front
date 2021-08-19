@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchApi } from "../helpers/functions";
 
 export function useResistFetch(url, selector, action, exception = false) {
           const [loading, setLoading] = useState(true)
@@ -8,12 +9,12 @@ export function useResistFetch(url, selector, action, exception = false) {
           const dispatch = useDispatch()
 
           const fetchPosts = useCallback(() => (async () => {
-                    const response = await fetch(url)
-                    const data = await response.json()
-                    if(response.ok) {
+                    try {
+                              const data = await fetchApi(url)
                               setLoading(false)
                               dispatch(action(data))
-                    } else {
+                    } catch (error) {
+                              console.log(error)
                               setLoading(false)
                               dispatch(action([]))
                     }

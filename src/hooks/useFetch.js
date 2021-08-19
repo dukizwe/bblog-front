@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { fetchApi } from "../helpers/functions"
 
 export default function useFetch(url) {
           const [state, setState] = useState({
@@ -7,14 +8,13 @@ export default function useFetch(url) {
           })
           useEffect(() => {
                     (async () => {
-                              const response = await fetch(url)
-                              const data = await response.json()
-                              if(response.ok) {
+                              try {
+                                        const data = await fetchApi(url)
                                         setState({
                                                   loading: false,
                                                   items: data
                                         })
-                              } else {
+                              } catch (error) {
                                         setState({
                                                   loading: false,
                                                   items: []
