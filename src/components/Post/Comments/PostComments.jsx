@@ -24,7 +24,7 @@ const Comments = ({comments}) => {
                                                             <div className="user-name__date">
                                                                       <div className="name">{comment.user.username}{isAuthor() && <span className="is__author">Author</span>}</div>
                                                                       <div className="date">
-                                                                                {moment(comment.createdAt).format('ddd, MMM D YYYY, h:mm')}
+                                                                                {moment(comment.createdAt).fromNow()}
                                                                       </div>
                                                             </div>
                                                   </div>

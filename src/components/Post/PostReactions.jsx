@@ -1,7 +1,11 @@
+import { useRef } from "react"
 import { useState } from "react"
+import { createPortal } from "react-dom/cjs/react-dom.development"
 import { useSelector } from "react-redux"
 import { fetchApi, minNumber } from "../../helpers/functions"
 import { userSelector } from "../../store/selectors/userSelector"
+import { CSSTransition } from "react-transition-group"
+import { useMemo } from "react"
 
 export default function PostReactions({postId, reactions: initialReactions}) {
           const [reactions, setReactions] = useState(initialReactions)
@@ -64,8 +68,51 @@ export default function PostReactions({postId, reactions: initialReactions}) {
                               </button>
                     </div>
           }
+
+          const ShareButton = () => {
+                    const shareRef = useRef(null)
+                    const [open, setOpen] = useState(false)
+
+                    const FakeElement = () => {
+                              const closeOpen = (e) => {
+                                        e.preventDefault()
+                                        e.stopPropagation()
+                                        setOpen(false)
+                              }
+                              return createPortal(
+                                        <CSSTransition in={true} timeout={2000} classNames="opak">
+                                        <div
+                                                  style={{position: "fixed", width: "100%", height: "100%", background: "#000000c4", inset:"0", zIndex: "1"}}
+                                                  onClick={closeOpen}
+                                        ></div>
+                                        </CSSTransition>,
+                                        document.body
+                              )
+                    }
+                    const showSocial = (e) => {
+                              e.preventDefault()
+                              setOpen(o => !o)
+                    }
+                    const openCls = open ? 'open' : ''
+                    return <div className={`share ${openCls}`} ref={shareRef}>
+                              <ul>
+                                        <li className="facebook"><a href="facebook"><img src="/static/images/facebook.png" /></a></li>
+                                        <li className="linkedin"><a href="facebook"><img src="/static/images/linkedin.png" /></a></li>
+                                        <li className="twitter"><a href="facebook"><img src="/static/images/twitter.png" /></a></li>
+                                        <li className="whatsapp"><a href="facebook"><img src="/static/images/whatsapp.png" /></a></li>
+                              </ul>
+                              <button onClick={showSocial}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-share" viewBox="0 0 16 16">
+                                        <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                                        </svg>
+                                        <span>Share</span>
+                              </button>
+                              {open && <FakeElement />}
+                    </div>
+          }
           return <>
                     <LikeButton />
                     <DislikeButton />
+                    <ShareButton />
           </>
 }

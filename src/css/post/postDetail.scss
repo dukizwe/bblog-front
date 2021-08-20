@@ -117,6 +117,7 @@
                                                             border-radius: 10px;
                                                             transition: background 0.3s ease-in-out, color 0.3s ease-in-out ,border 0.3s ease-in-out, opacity 0.3s ease-in-out;
                                                             min-width: 76px;
+                                                            z-index: 1;
                                                             &.voted {
                                                                       color: #007BFF;
                                                                       border: 1px solid #007BFF;
@@ -128,13 +129,68 @@
                                                                       opacity: .6;
                                                                       pointer-events: none;
                                                             }
+                                                            svg  {
+                                                                      transition: transform .45s ease;
+                                                            }
                                                   }
                                                   span {
                                                             margin-left: 5px;
                                                   }
                                         }
-                                        .reactions .dislikes__count, .reactions .share {
+                                        .reactions .dislikes__count {
                                                   margin-left: 5px;
+                                        }
+                                        .reactions .share {
+                                                  margin-left: 5px;
+                                                  position: relative;
+                                                  z-index: 2;
+                                                  ul {
+                                                            list-style: none;
+                                                            margin: 0;
+                                                            padding: 0;
+                                                            position: absolute;
+                                                            right: 0;
+                                                            left: 0;
+                                                            bottom: 0;
+                                                  }
+                                                  ul li {
+                                                            --translateY: 0;
+                                                            --translateX: 0;
+                                                            --scale: .92;
+                                                            position: absolute;
+                                                            width: 30px;
+                                                            height: 30px;
+                                                            bottom: 0;
+                                                            left: 25px;
+                                                            transition: transform 0.45s ease;
+                                                            transform: translateY(var(--translateY)) translateX(var(--translateX)) scale(var(--scale));
+                                                            img {
+                                                                      width: 100%;
+                                                                      height: 100%;
+                                                            }
+                                                  }
+                                                  &.open ul li {
+                                                            --scale: 1;
+                                                  }
+                                                  &.open ul li.facebook {
+                                                            --translateY: -40px;
+                                                            --translateX: -55px;
+                                                  }
+                                                  &.open ul li.linkedin {
+                                                            --translateY: -60px;
+                                                            --translateX: -15px;
+                                                  }
+                                                  &.open ul li.twitter {
+                                                            --translateY: -60px;
+                                                            --translateX: 25px;
+                                                  }
+                                                  &.open ul li.whatsapp {
+                                                            --translateY: -40px;
+                                                            --translateX: 55px;
+                                                  }
+                                                  &.open button svg {
+                                                            transform: rotate(-90deg);
+                                                  }
                                         }
                                         .comments {
                                                   a {
@@ -346,4 +402,15 @@
                     }
           }
 
+}
+.opak-appear {
+          opacity: 0;
+}
+.opak-appear-active {
+          opacity: 1;
+          transition: opacity 1s;
+}
+.opak-enter-active {
+          opacity: 1;
+          transition: opacity 1s;
 }
