@@ -73,7 +73,7 @@ export default function PostDetail() {
                                                   <h1 className="title">{post.post.title}</h1>
                                         </div>
                                         <div className="image__container">
-                                                  <PostImage image={post.post.image} isThumb={false} skeletonHeight="500px" />
+                                                  {/* <PostImage image={post.post.image} isThumb={false} skeletonHeight="500px" /> */}
                                         </div>
                                         <div className="article__row">
                                                   <div className="article__content">
@@ -82,7 +82,7 @@ export default function PostDetail() {
                                                             </div>
                                                   </div>
                                                   <div className="article__description aside">
-                                                            <div className="article__author">
+                                                            {/* <div className="article__author">
                                                                       <h6 className="title">Written by</h6>
                                                                       <div className="author__report">
                                                                                 <div className="author">
@@ -114,7 +114,7 @@ export default function PostDetail() {
                                                                       <div className="comments">
                                                                                 <a href="#comments">{minNumber(post.post.reactions.comments)} comments</a>
                                                                       </div>
-                                                            </div>
+                                                            </div> */}
                                                             {/* <div className="article__outline">
                                                                       <div className="title">Article outline</div>
                                                                       <h5 className="active"><a href="#example">Lorem ipsum, dolor sit amet consectetur</a></h5>
@@ -126,7 +126,7 @@ export default function PostDetail() {
                                                                       <h5><a href="#example">quia tempore fugiat blanditiis voluptatum</a></h5>
                                                                       <h5><a href="#example"> laboriosam tempora sapiente nulla, quas velit</a>!</h5>
                                                             </div> */}
-                                                            <div className="article__categories">
+                                                            {/* <div className="article__categories">
                                                                       <h6 className="title">Categories</h6>
                                                                       <div className="link-group categories">
                                                                                 <Categories categories={post.post.categories} />
@@ -137,7 +137,7 @@ export default function PostDetail() {
                                                                       <div className="link-group tags">
                                                                                 <Tags categories={post.post.categories} />
                                                                       </div>
-                                                            </div>
+                                                            </div> */}
                                                             <PostComments postId={post.post._id} />
                                                   </div>
                                         </div>

@@ -17,11 +17,8 @@ export const minNumber = (number) => {
  */
 export const fetchApi = async (url, options = {}) => {
           const user = JSON.parse(localStorage.getItem('user'))
-          let headers = {}
-          if (user) headers.authorization = `bearer ${user.token}`
-
+          if (user) options = {...options, headers: {...options.headers, authorization: `bearer ${user.token}`}}
           const response = await fetch(`/api${url}`, {
-                    headers,
                     ...options
           })
           if(response.ok) {

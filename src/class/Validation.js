@@ -82,6 +82,7 @@ export default class Validation {
           }
 
           getErrors() {
+                    this.run()
                     return this.errors
           }
 

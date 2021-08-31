@@ -282,6 +282,14 @@
                                                             &:focus {
                                                                       border: 1px solid #007BFF;
                                                             }
+                                                            &.is-invalid {
+                                                                      border: 1px solid red;
+                                                            }
+                                                  }
+                                                  .invalid-error {
+                                                            font-size: 14px;
+                                                            color: red;
+                                                            margin: -8px 0 0 10px;
                                                   }
                                                   .form__send {
                                                             text-align: right;
@@ -301,10 +309,23 @@
                                                   }
                                         }
                                         .all-comments .comment {
-                                                  margin-top: 10px; 
+                                                  margin-top: 10px;
                                                   background: #fff;
                                                   padding: 5px;
                                                   border-radius: 5px;
+                                                  transform: scale(1);
+                                                  &.new-comment-move {
+                                                            transition: all .45s;
+                                                  }
+                                                  &.new-comment-enter {
+                                                            opacity: 0;
+                                                            transform: translateY(-20px) scale(0.92);
+                                                            transition: all .45s ease-in-out;
+                                                  }
+                                                  &.new-comment-enter-active {
+                                                            transform: translateY(0) scale(1);
+                                                            opacity: 1;
+                                                  }
                                         }
                                         .all-comments .comment .comment-header {
                                                   display: flex;
@@ -403,14 +424,19 @@
           }
 
 }
-.opak-appear {
+.opak-appear,
+.opak-enter {
           opacity: 0;
 }
-.opak-appear-active {
-          opacity: 1;
-          transition: opacity 1s;
-}
+.opak-appear-active,
 .opak-enter-active {
           opacity: 1;
-          transition: opacity 1s;
+          transition: opacity .45s ease-in-out;
+}
+.opak-exit {
+          opacity: 1;
+}
+.opak-exit-active {
+          opacity: 0;
+          transition: opacity .45s ease-in-out;
 }

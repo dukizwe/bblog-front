@@ -8,11 +8,10 @@ export const useFormErrorsHandle = (data, rules, customMessages) => {
           const validation = new Validation(data, rules, customMessages)
 
           const setError = (key, errors) => {
-                    setErrors({...errors, [key]: errors})
+                    setErrors(err =>( {...err, [key]: errors}))
           }
 
           const checkFieldData = (e) => {
-                    console.log('called')
                     e.preventDefault()
                     const name = e.target.name
                     const errors = validation.getError(name)
@@ -29,10 +28,12 @@ export const useFormErrorsHandle = (data, rules, customMessages) => {
 
           const isValidate = () => {
                     validation.run()
-                    validation.isValidate()
+                    return validation.isValidate()
           }
 
+          const run = () => validation.run()
+
           return {
-                    errors, setErrors, setError, getError, hasError, checkFieldData, getErrors, isValidate
+                    errors, setErrors, setError, getError, hasError, checkFieldData, getErrors, isValidate, run
           }
 }

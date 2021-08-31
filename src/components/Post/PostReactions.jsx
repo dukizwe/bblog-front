@@ -4,7 +4,7 @@ import { createPortal } from "react-dom/cjs/react-dom.development"
 import { useSelector } from "react-redux"
 import { fetchApi, minNumber } from "../../helpers/functions"
 import { userSelector } from "../../store/selectors/userSelector"
-import { CSSTransition } from "react-transition-group"
+import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { useMemo } from "react"
 
 export default function PostReactions({postId, reactions: initialReactions}) {
@@ -71,7 +71,8 @@ export default function PostReactions({postId, reactions: initialReactions}) {
 
           const ShareButton = () => {
                     const shareRef = useRef(null)
-                    const [open, setOpen] = useState(false)
+                    const fakeRef = useRef(null)
+                    const [opened, setOpen] = useState(false)
 
                     const FakeElement = () => {
                               const closeOpen = (e) => {
@@ -80,12 +81,11 @@ export default function PostReactions({postId, reactions: initialReactions}) {
                                         setOpen(false)
                               }
                               return createPortal(
-                                        <CSSTransition in={true} timeout={2000} classNames="opak">
                                         <div
                                                   style={{position: "fixed", width: "100%", height: "100%", background: "#000000c4", inset:"0", zIndex: "1"}}
                                                   onClick={closeOpen}
-                                        ></div>
-                                        </CSSTransition>,
+                                                  ref={fakeRef}
+                                        ></div>,
                                         document.body
                               )
                     }
@@ -93,7 +93,7 @@ export default function PostReactions({postId, reactions: initialReactions}) {
                               e.preventDefault()
                               setOpen(o => !o)
                     }
-                    const openCls = open ? 'open' : ''
+                    const openCls = opened ? 'open' : ''
                     return <div className={`share ${openCls}`} ref={shareRef}>
                               <ul>
                                         <li className="facebook"><a href="facebook"><img src="/static/images/facebook.png" /></a></li>
@@ -107,9 +107,18 @@ export default function PostReactions({postId, reactions: initialReactions}) {
                                         </svg>
                                         <span>Share</span>
                               </button>
-                              {open && <FakeElement />}
+                              <CSSTransition
+                                        in={opened}
+                                        timeout={450}
+                                        unmountOnExit
+                                        appear
+                                        nodeRef={fakeRef}
+                                        classNames="opak">
+                                        <FakeElement />
+                              </CSSTransition>
                     </div>
           }
+
           return <>
                     <LikeButton />
                     <DislikeButton />
