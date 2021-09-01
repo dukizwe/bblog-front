@@ -4,8 +4,9 @@ import { createPortal } from "react-dom/cjs/react-dom.development"
 import { useSelector } from "react-redux"
 import { fetchApi, minNumber } from "../../helpers/functions"
 import { userSelector } from "../../store/selectors/userSelector"
-import { CSSTransition, TransitionGroup } from "react-transition-group"
-import { useMemo } from "react"
+import { CSSTransition } from "react-transition-group"
+
+import '../../css/post/postReactions.scss'
 
 export default function PostReactions({postId, reactions: initialReactions}) {
           const [reactions, setReactions] = useState(initialReactions)

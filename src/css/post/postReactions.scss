@@ -1,0 +1,118 @@
+.article__reactions {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: max-content;
+          margin: 10px auto;
+          .reactions {
+                    display: flex;
+                    align-items: center;
+          }
+          .reactions .likes__count,
+          .reactions .dislikes__count,
+          .share {
+                    display: flex;
+                    align-items: center;
+                    button {
+                              outline: none;
+                              border-radius: 5px;
+                              background: #fff;
+                              color: #333;
+                              padding: 5px 10px;
+                              border: 1px solid #ddd;
+                              border-radius: 10px;
+                              transition: background 0.3s ease-in-out,
+                                        color 0.3s ease-in-out,
+                                        border 0.3s ease-in-out,
+                                        opacity 0.3s ease-in-out;
+                              min-width: 76px;
+                              z-index: 1;
+                              &.voted {
+                                        color: #007bff;
+                                        border: 1px solid #007bff;
+                              }
+                              &:hover,
+                              &:focus {
+                                        background: #dcdcdc;
+                              }
+                              &:disabled {
+                                        opacity: 0.6;
+                                        pointer-events: none;
+                              }
+                              svg {
+                                        transition: transform 0.45s ease;
+                              }
+                    }
+                    span {
+                              margin-left: 5px;
+                    }
+          }
+          .reactions .dislikes__count {
+                    margin-left: 5px;
+          }
+          .reactions .share {
+                    margin-left: 5px;
+                    position: relative;
+                    z-index: 2;
+                    ul {
+                              list-style: none;
+                              margin: 0;
+                              padding: 0;
+                              position: absolute;
+                              right: 0;
+                              left: 0;
+                              bottom: 0;
+                    }
+                    ul li {
+                              --translateY: 0;
+                              --translateX: 0;
+                              --scale: 0.92;
+                              position: absolute;
+                              width: 30px;
+                              height: 30px;
+                              bottom: 0;
+                              left: 25px;
+                              transition: transform 0.45s ease;
+                              transform: translateY(var(--translateY))
+                                        translateX(var(--translateX))
+                                        scale(var(--scale));
+                              img {
+                                        width: 100%;
+                                        height: 100%;
+                              }
+                    }
+                    &.open ul li {
+                              --scale: 1;
+                    }
+                    &.open ul li.facebook {
+                              --translateY: -40px;
+                              --translateX: -55px;
+                    }
+                    &.open ul li.linkedin {
+                              --translateY: -60px;
+                              --translateX: -15px;
+                    }
+                    &.open ul li.twitter {
+                              --translateY: -60px;
+                              --translateX: 25px;
+                    }
+                    &.open ul li.whatsapp {
+                              --translateY: -40px;
+                              --translateX: 55px;
+                    }
+                    &.open button svg {
+                              transform: rotate(-90deg);
+                    }
+          }
+          .comments {
+                    margin-left: 10px;
+                    a {
+                              color: #757575;
+                              transition: color 0.2s ease-in-out;
+                              &:hover,
+                              &:focus {
+                                        color: #212529;
+                              }
+                    }
+          }
+}

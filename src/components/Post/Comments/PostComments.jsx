@@ -171,7 +171,7 @@ export default function PostComments({postId}) {
           const value = {setComments, postId, user, positions, setCommentBounding}
           
           return <CommenstContext.Provider value={value}>
-          <div className="article__comments">
+          <div className="article__comments" id="comments">
                     <h6 className="title">Comments</h6>
                               {user ? <CommentForm /> :<div>You need to be connected</div>}
                     <hr/>
