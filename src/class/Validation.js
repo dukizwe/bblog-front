@@ -20,7 +20,8 @@ export default class Validation {
                     return this.errors[key]
           }
 
-          required(key, value) {
+          required(key, intitialValue) {
+                    const value = intitialValue.trim()
                    if(!value || value === '' || value.length === 0) {
                              this.setError(key, this.customMessages?.[key]?.required || `This field is required`)
                    }

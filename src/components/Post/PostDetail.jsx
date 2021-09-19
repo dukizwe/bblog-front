@@ -1,6 +1,6 @@
 import moment from "moment";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom"
 import { postsSelectors, topPostsSelectors } from "../../store/selectors/postsSelector";
 import { PostImage } from "./PostCard";
@@ -11,6 +11,7 @@ import PostComments from "./Comments/PostComments";
 import '../../css/post/postDetail.scss'
 import { fetchApi, minNumber } from "../../helpers/functions";
 import { userSelector } from "../../store/selectors/userSelector";
+import { setInDetailPost } from "../../store/actions/postActions";
 
 const Skeletons = () => {
           return <>
@@ -32,7 +33,7 @@ const Tags = ({categories: tags}) => {
 export default function PostDetail() {
           const { postId } = useParams()
           const [post, setPost] = useState({ loading: true, post: null})
-          const user = useSelector(userSelector)
+          const dispatch = useDispatch()
 
           const posts = useSelector(postsSelectors)
           var topPosts = []
@@ -47,6 +48,7 @@ export default function PostDetail() {
                                         loading: false,
                                         post: cashedPost
                               })
+                              dispatch(setInDetailPost(cashedPost))
                     } else {
                               (async () => {
                                         try {
@@ -55,6 +57,7 @@ export default function PostDetail() {
                                                             loading: false,
                                                             post: post
                                                   })
+                                                  dispatch(setInDetailPost(post))
                                         } catch (error) {
                                                   setPost({
                                                             loading: false,

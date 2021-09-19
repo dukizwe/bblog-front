@@ -1,12 +1,17 @@
+import { useContext } from "react"
 import { useState } from "react"
 import { useSelector } from "react-redux"
-import { fetchApi, minNumber, react } from "../../../helpers/functions"
+import { fetchApi, minNumber } from "../../../helpers/functions"
 import { userSelector } from "../../../store/selectors/userSelector"
+import { CommentContext } from "./Comment"
 
-export default function CommentReactions ({commentId, reactions: initialReactions}) {
+export default function CommentReactions ({commentId, reactions: initialReactions,setRepliesActive}) {
           const [reactions, setReactions] = useState(initialReactions)
           const [loading, setLoading] = useState(false)
           const user = useSelector(userSelector)
+          const { isReplies } = useContext(CommentContext)
+          const replyCls = isReplies ? 'reply ' : ''
+          console.log(isReplies)
 
           const likeComment = async (e) => {
                     e.preventDefault()
@@ -29,6 +34,11 @@ export default function CommentReactions ({commentId, reactions: initialReaction
                     setReactions(reactions)
           }
 
+          const handleReply = (e) => {
+                    e.preventDefault()
+                    setRepliesActive(oldRepliesActive => !oldRepliesActive)
+          }
+
           const LikeButton = () => {
                     const LikeIcon = () => {
                               return reactions.vote === 1 ? 
@@ -41,7 +51,7 @@ export default function CommentReactions ({commentId, reactions: initialReaction
                     }
                     const likedCls = reactions.vote === 1 ? 'voted' : ''
                     return <div className="likes__count">
-                              <button onClick={likeComment} className={likedCls} disabled={loading}>
+                              <button onClick={likeComment} className={replyCls + likedCls} disabled={loading}>
                                         <LikeIcon />
                                         <span>{minNumber(reactions.likes)}</span>
                               </button>
@@ -59,16 +69,16 @@ export default function CommentReactions ({commentId, reactions: initialReaction
                     }
                     const dislikedCls = reactions.vote === -1 ? 'voted' : ''
                     return <div className="dislikes__count">
-                              <button onClick={dislikeComment} className={dislikedCls} disabled={loading}>
+                              <button onClick={dislikeComment} className={replyCls + dislikedCls} disabled={loading}>
                                         <DiskikeIcon />
                                         <span>{minNumber(reactions.dislikes)}</span>
-                              </button>
+                              </button> 
                     </div>
           }
           const ReplyButton = () => {
                     return (
                     <div className="replies__count">
-                              <button>
+                              <button onClick={handleReply}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-reply" viewBox="0 0 16 16">
                                         <path d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z"/>
                                         </svg>
@@ -80,6 +90,6 @@ export default function CommentReactions ({commentId, reactions: initialReaction
           <div className="comments__actions">
                     <LikeButton />
                     <DislikeButton />
-                    <ReplyButton />
+                    {!isReplies && <ReplyButton />}
           </div>)
 }

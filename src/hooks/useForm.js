@@ -24,5 +24,9 @@ export const useForm = (initials) => {
                               setData(fd => ({...fd, [name]: file}))
                     }
           }
-          return [data, handleChange]
+
+          const setValue = (name, value) => {
+                    return setData(d => ({...d, [name]: value}))
+          }
+          return [data, handleChange, setValue]
 }

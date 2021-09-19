@@ -1,4 +1,4 @@
-import { APPEND_POSTS_ACTION, APPEND_TOP_POSTS_ACTION, ADD_POSTS_ACTION, PREPEND_POSTS_ACTION } from '../reducers/postReducer'
+import { APPEND_POSTS_ACTION, APPEND_TOP_POSTS_ACTION, ADD_POSTS_ACTION, PREPEND_POSTS_ACTION, SET_IN_DETAIL_POST } from '../reducers/postReducer'
 
 export const appendPostsAction = (posts) => {
           return {
@@ -29,5 +29,12 @@ export const appendTopPostsAction = (posts, category) => {
           return {
                     type: APPEND_TOP_POSTS_ACTION,
                     payload: postsWithCategory
+          }
+}
+
+export const setInDetailPost = (post) => {
+          return {
+                    type: SET_IN_DETAIL_POST,
+                    payload: post
           }
 }

@@ -1,0 +1,374 @@
+.article__comments {
+          .form-row {
+                    display: flex;
+          }
+          .form-row .user {
+                    width: 30px;
+                    height: 30px;
+                    background: #fff;
+                    border-radius: 50%;
+                    img {
+                              width: 100%;
+                              height: 100%;
+                              object-fit: contain;
+                    }
+          }
+          .form-row .form {
+                    flex: 1;
+                    textarea {
+                              border: 1px solid #d7eaff;
+                              outline: none;
+                              padding: 5px 10px;
+                              width: 100%;
+                              height: 100%;
+                              background: #fff;
+                              border-radius: 5px;
+                              transition: border 0.3s ease-in-out;
+                              resize: none;
+                              margin-left: 5px;
+                              color: #333;
+                              &:focus {
+                                        border: 1px solid #007bff;
+                              }
+                              &.is-invalid {
+                                        border: 1px solid red;
+                              }
+                    }
+                    .invalid-error {
+                              font-size: 14px;
+                              color: red;
+                              margin: -8px 0 0 10px;
+                    }
+                    .form__send {
+                              text-align: right;
+                              button {
+                                        border: 1px solid #007bff;
+                                        border-radius: 5px;
+                                        outline: none;
+                                        color: #007bff;
+                                        padding: 5px 10px;
+                                        background: transparent;
+                                        transition: background 0.3s ease-in-out,
+                                        border 0.3s ease-in-out;
+                                        &:hover,
+                                        &:focus {
+                                                  background: #d7eaff;
+                                                  border-color: transparent;
+                                        }
+                              }
+                    }
+          }
+          .all-comments .comment {
+                    &:not(:first-child) {
+                              margin-top: 10px;
+                    }
+                    background: #fff;
+                    padding: 5px;
+                    border-radius: 10px;
+                    position: relative;
+                    &.reply {
+                              background: #f1f1f1;
+                    }
+                    .reply-indicator {
+                              width: 30px;
+                              height: 27px;
+                              position: absolute;
+                              left: -32px;
+                              border-bottom-left-radius: 10px;
+                              border-bottom: 2px solid #ddd;
+                    }
+                    &.new-comment-enter {
+                              opacity: 0;
+                              transform: translateY(-20px) scale(0.92);
+                              transition: all 0.45s ease-in-out;
+                    }
+                    &.new-comment-enter-active {
+                              transform: translateY(0) scale(1);
+                              opacity: 1;
+                    }
+          }
+          .all-comments .comment .comment-header {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    .user {
+                              display: flex;
+                              align-items: center;
+                              .user-avatar {
+                                        width: 40px;
+                                        height: 40px;
+                                        background: #fff;
+                                        border-radius: 50%;
+                                        img {
+                                                  width: 100%;
+                                                  height: 100%;
+                                                  object-fit: contain;
+                                        }
+                              }
+                              .user-name__date {
+                                        margin-left: 5px;
+                                        .name {
+                                                  display: flex;
+                                                  align-items: center;
+                                        }
+                                        .name span.is__author {
+                                                  border: 1px solid #007bff;
+                                                  padding: 1px 3px;
+                                                  border-radius: 5px;
+                                                  color: #007bff;
+                                                  font-size: 10px;
+                                                  margin-left: 5px;
+                                        }
+                              }
+                              .user-name__date .date {
+                                        color: #757575;
+                                        font-size: 14px;
+                              }
+                    }
+                    button.report-comment {
+                              outline: none;
+                              border-radius: 5px;
+                              background: #fff;
+                              color: #333;
+                              padding: 2px 10px 5px 10px;
+                              border: none;
+                              border-radius: 10px;
+                              transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+                              &.reply {
+                                        background: #f1f1f1;
+                              }
+                              &:hover,
+                              &:focus {
+                                        background: #dcdcdc;
+                                        border: none;
+                              }
+                    }
+                    .comment__more {
+                              position: relative;
+                    }
+                    .comment__more ul {
+                              margin: 0;
+                              padding: 0;
+                              position: absolute;
+                              right: 0;
+                              background: #F2F5FE;
+                              margin-top: 5px;
+                              min-width: 120px;
+                              list-style: none;
+                              border-radius: 10px;
+                              z-index: 1;
+                              &.pop-appear,
+                              &.pop-enter {
+                                        opacity: 0;
+                                        transform: scale(2);
+                              }
+                              &.pop-appear-active,
+                              &.pop-enter-active {
+                                        transform: scale(1);
+                                        opacity: 1;
+                                        transition: transform 100ms cubic-bezier(0, 0.4, 0.78, 1.36), opacity 100ms ease-in-out;
+                              }
+                              &.pop-exit {
+                                        opacity: 1;
+                                        transform: scale(1);
+                              }
+                              &.pop-exit-active {
+                                        opacity: 0;
+                                        transform: scale(1.5);
+                                        transition: transform 100ms cubic-bezier(0, 0.4, 0.78, 1.36), opacity 100ms ease-in-out;
+                              }
+                              li {
+                                        padding: 0;
+                                        margin: 0;
+                              }
+                              li:first-child button {
+                                        border-top-left-radius: 10px;
+                                        border-top-right-radius: 10px;
+                              }
+                              li:last-child button {
+                                        border-bottom-left-radius: 10px;
+                                        border-bottom-right-radius: 10px;
+                              }
+                              li button {
+                                        border: none;
+                                        width: 100%;
+                                        background: none;
+                                        display: flex;
+                                        align-items: baseline;
+                                        justify-content: sp;
+                                        color: #555;
+                                        padding: 5px 15px;
+                                        transition: background 0.3s ease-in-out;
+                                        &:hover,
+                                        &:focus {
+                                                  background: #dadada;
+                                        }
+                              }
+                              li button .text {
+                                        margin-left: 10px;
+                              }
+                    }
+          }
+          .all-comments .comment .comments__actions {
+                    display: flex;
+                    align-items: center;
+                    margin-top: 5px;
+                    .likes__count,
+                    .dislikes__count,
+                    .replies__count {
+                              display: flex;
+                              align-items: center;
+                              button {
+                                        outline: none;
+                                        background: #fff;
+                                        color: #333;
+                                        padding: 3px 20px;
+                                        border: 1px solid #ddd;
+                                        border-radius: 10px;
+                                        transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+                                        &.reply {
+                                                  background: #f1f1f1;
+                                        }
+                                        &.voted {
+                                                  color: #007bff;
+                                                  border: 1px solid #007bff;
+                                        }
+                                        &:hover,
+                                        &:focus {
+                                                  background: #dcdcdc;
+                                                  border: 1px solid #ddd;
+                                        }
+                                        &:disabled {
+                                                  opacity: 0.6;
+                                                  pointer-events: none;
+                                        }
+                              }
+                              span {
+                                        margin-left: 5px;
+                              }
+                    }
+                    .dislikes__count {
+                              margin-left: 5px;
+                    }
+                    .replies__count {
+                              margin-left: 5px;
+                    }
+          }
+          .all-comments .comment .comment__content.reply {
+
+                    .likes__count,
+                    .dislikes__count,
+                    .replies__count {
+                              button {
+                                        padding: 2px 10px;
+                              }
+                    }
+          }
+          .replies .form-row {
+                    margin: 10px 0;
+                    textarea {
+                              height: 37px;
+                              margin-left: 0;
+                              background: #f1f1f1;
+                    }
+          }
+          .replies.has-border {
+                    border-left: 2px solid #f1f1f1;
+          }
+          .replies .comments-container {
+                    margin-left: 30px;
+          }
+
+          .all-comments .comment__edit {
+                    width: 100%;
+                    .text-area {
+                              width: 100%;
+                    }
+                    .text-area textarea {
+                              border: 1px solid #d7eaff;
+                              outline: none;
+                              padding: 5px 10px;
+                              width: 100%;
+                              height: 100%;
+                              background: #fff;
+                              border-radius: 5px;
+                              transition: border 0.3s ease-in-out;
+                              resize: none;
+                              color: #333;
+                              &:focus {
+                                        border: 1px solid #007bff;
+                              }
+                              &.is-invalid {
+                                        border: 1px solid red;
+                              }
+                    }
+                    .edit__footer {
+                              display: flex;
+                              align-items: center;
+                              justify-content: flex-end;
+                              button {
+                                        border: 1px solid #007bff;
+                                        border-radius: 3px;
+                                        outline: none;
+                                        color: #007bff;
+                                        padding: 3 10px;
+                                        background: transparent;
+                                        transition: background 0.3s ease-in-out,
+                                        border 0.3s ease-in-out;
+                                        &.cancel {
+                                                  margin-right: 5px;
+                                        }
+                                        &.save {
+                                                  color: #fff;
+                                                  background: #007BFF;
+                                                  &:hover,
+                                                  &:focus {
+                                                            background: #0050c5;
+                                                  }
+                                        }
+                                        &:hover,
+                                        &:focus {
+                                                  background: #d7eaff;
+                                                  border-color: transparent;
+                                        }
+                              }
+                    }
+          }
+}
+.top-slide-enter {
+          opacity: 0;
+          // transform: translateY(-100%);
+}
+.top-slide-enter-active {
+          // transform: translateY(0);
+          opacity: 1;
+          transition: transform 100ms cubic-bezier(0, 0.4, 0.78, 1.36), opacity 100ms ease-in-out;
+}
+.top-slide-exit {
+          opacity: 1;
+          // transform: translateY(0);
+}
+.top-slide-exit-active {
+          opacity: 0;
+          // transform: translateY(-100%);
+          transition: transform 100ms cubic-bezier(0, 0.4, 0.78, 1.36), opacity 100ms ease-in-out;
+}
+
+.bottom-slide-enter {
+          opacity: 0;
+          // transform: translateY(100%);
+}
+.bottom-slide-enter-active {
+          // transform: translateY(0);
+          opacity: 1;
+          transition: transform 100ms cubic-bezier(0, 0.4, 0.78, 1.36), opacity 100ms ease-in-out;
+}
+.bottom-slide-exit {
+          opacity: 1;
+          // transform: translateY(0);
+}
+.bottom-slide-exit-active {
+          opacity: 0;
+          // transform: translateY(100%);
+          transition: transform 100ms cubic-bezier(0, 0.4, 0.78, 1.36), opacity 100ms ease-in-out;
+}
