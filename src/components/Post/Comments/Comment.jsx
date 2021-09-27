@@ -13,6 +13,7 @@ import { createContext } from "react";
 import CommentReplies from "./CommentReplies";
 import Skeleton from "../../main/Skeleton";
 import { inDetailPost } from "../../../store/selectors/postsSelector";
+import { useFormErrorsHandle } from "../../../hooks/useFormErrorsHandle";
 
 export const CommentContext = createContext({})
 
@@ -24,8 +25,13 @@ export default function Comment({ comment, moreCommentActive, setMoreCommentActi
                     setInEdit(true)
                     setMoreCommentActive(false)
           }
+
+          const setCommentBody = (newBody) => {
+                    comment.body = newBody
+          }
           const value = {
                     comment,
+                    setCommentBody,
                     moreCommentActive,
                     setMoreCommentActive,
                     inEdit,
@@ -63,15 +69,51 @@ export default function Comment({ comment, moreCommentActive, setMoreCommentActi
 }
 
 const EditCommentForm = () => {
-          const { comment, setInEdit } = useContext(CommentContext)
+          const { comment, setInEdit, setCommentBody } = useContext(CommentContext)
           const [newComment, handleChange] = useForm({ body: comment.body})
+          const { setErrors, getErrors,  isValidate } = useFormErrorsHandle(newComment, {
+                              body: {
+                                        required: true,
+                                        length: [null, 5000],
+                              },
+                    });
+          const handleSaveChange = async (e) => {
+                    e.preventDefault()
+                    setErrors({});
+                    if (isValidate()) {
+                              try {
+                                        const newBody = await fetchApi(
+                                                  `/comments/${comment._id}`,
+                                                  {
+                                                            method: "PUT",
+                                                            body: JSON.stringify(
+                                                                      {
+                                                                                body: newComment.body,
+                                                                      }
+                                                            ),
+                                                            headers: {
+                                                                      "Content-type": "application/json",
+                                                            },
+                                                  }
+                                        );
+                                        setCommentBody(newBody.body)
+                                        setInEdit(false)
+                              } catch (error) {
+                                        if (error.errors) {
+                                                  setErrors(error.errors);
+                                        }
+                              }
+                    } else {
+                              setErrors(getErrors());
+                    }
+          }
           return <div className="comment__edit">
                     <div className="text-area">
-                              <textarea name="body" value={ newComment.body } onChange={handleChange} placeholder="Type your comment here"></textarea>    
+                              <textarea name="body" value={ newComment.body } onChange={handleChange} placeholder="Write your comment"></textarea>    
                     </div>
                     <div className="edit__footer">
                               <button className="cancel" onClick={() => setInEdit(false)}>Cancel</button>
-                              <button className="save">Save</button>
+                              <button className="save" onClick={handleSaveChange} disabled={!isValidate()}>Save</button>
                     </div>
           </div>
 }

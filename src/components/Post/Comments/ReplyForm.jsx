@@ -73,14 +73,14 @@ export default function ReplyForm ({ commentId, setReplies }) {
                                         <div className="form__input">
                                                   <textarea
                                                             id="body"
-                                                            placeholder="Type your reply here"
+                                                            placeholder="Write your reply"
                                                             name="body"
                                                             value={reply.body}
                                                             onChange={handleChange}
                                                   ></textarea>
                                         </div>
                                         <div className="form__send">
-                                                  <button>Send</button>
+                                                  <button disabled={!isValidate()}>Send</button>
                                         </div>
                               </form>
                     </div>

@@ -48,8 +48,11 @@
                                         color: #007bff;
                                         padding: 5px 10px;
                                         background: transparent;
-                                        transition: background 0.3s ease-in-out,
-                                        border 0.3s ease-in-out;
+                                        transition: background 0.3s ease-in-out, border 0.3s ease-in-out, opacity 0.3s ease-in-out;
+                                        &:disabled {
+                                                  opacity: .5;
+                                                  pointer-events: none;
+                                        }
                                         &:hover,
                                         &:focus {
                                                   background: #d7eaff;
@@ -321,6 +324,10 @@
                                         &.save {
                                                   color: #fff;
                                                   background: #007BFF;
+                                                  &:disabled {
+                                                            opacity: .5;
+                                                            pointer-events: none;
+                                                  }
                                                   &:hover,
                                                   &:focus {
                                                             background: #0050c5;

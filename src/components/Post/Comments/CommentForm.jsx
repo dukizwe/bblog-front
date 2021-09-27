@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { useContext } from "react";
 import { fetchApi } from "../../../helpers/functions";
 import { useForm } from "../../../hooks/useForm";
@@ -48,7 +47,6 @@ export default function CommentForm() {
                               },
                     });
 
-
           const handleSubmit = async (e) => {
                     e.preventDefault();
                     setErrors({});
@@ -92,8 +90,6 @@ export default function CommentForm() {
                     }
           };
           const invalidCls = hasError("body") ? "is-invalid" : "";
-
-          console.log('form')
           return (
                     <div className="form-row">
                               <div className="user">
@@ -106,7 +102,7 @@ export default function CommentForm() {
                                         <div className="form__input">
                                                   <textarea
                                                             id="body"
-                                                            placeholder="Type your comment here"
+                                                            placeholder="Write your comment"
                                                             name="body"
                                                             value={comment.body}
                                                             onChange={
@@ -123,7 +119,7 @@ export default function CommentForm() {
                                                   )}
                                         </div>
                                         <div className="form__send">
-                                                  <button>Send</button>
+                                                  <button disabled={comment.body == ""}>Send</button>
                                         </div>
                               </form>
                     </div>
